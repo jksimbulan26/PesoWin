@@ -875,13 +875,13 @@ body {
       </div>
       <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
     </div>
-    <div class="quick-card">
+    <div class="quick-card" onclick="openSlotGame()">
       <div class="qc-top qc-bg2">
         <div class="qc-glow"></div>
         <span class="qc-icon">🎰</span>
-        <div class="qc-info"><div class="qc-title">Slot 7</div><div class="qc-sub">Slot 7 game</div></div>
+        <div class="qc-info"><div class="qc-title">Slot 7</div><div class="qc-sub">Playable now</div></div>
       </div>
-      <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
+      <div class="qc-foot"><span class="coming-txt">Jackpot up to 20x</span><button class="btn-play">LARUIN</button></div>
     </div>
     <div class="quick-card">
       <div class="qc-top qc-bg3">
@@ -1057,6 +1057,44 @@ body {
     <div class="age-badge">18+</div>
   </div>
 </footer>
+
+
+<div id="slotModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#112818; border:2px solid #f0c040; border-radius:16px; padding:30px; width:420px; text-align:center;">
+    <h2 style="color:#f0c040; margin-bottom:20px;">🎰 Slot 7</h2>
+    <div id="slotReels" style="display:flex; justify-content:center; gap:12px; margin-bottom:20px;">
+      <div class="reel">❔</div><div class="reel">❔</div><div class="reel">❔</div>
+    </div>
+    <div style="margin-bottom:15px;">Bet:
+      <select id="betAmount"><option value="10">₱10</option><option value="50">₱50</option><option value="100">₱100</option></select>
+    </div>
+    <button onclick="spinSlot()" class="btn-play" style="padding:12px 30px;">SPIN</button>
+    <button onclick="closeSlotGame()" class="btn-play" style="background:#777; margin-left:10px;">Close</button>
+    <p id="slotResult" style="margin-top:20px; color:white;"></p>
+  </div>
+</div>
+<style>
+.reel{width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:42px;background:#1a3d27;border:2px solid #f0c040;border-radius:12px;}
+</style>
+<script>
+let balance = 2200;
+const symbols = ["🍒","🍋","🔔","7️⃣","💎"];
+function updateBalance(){document.querySelector(".balance-pill").innerText = "₱" + balance.toLocaleString();}
+function openSlotGame(){document.getElementById("slotModal").style.display="flex";}
+function closeSlotGame(){document.getElementById("slotModal").style.display="none";}
+function spinSlot(){
+ let bet=parseInt(document.getElementById("betAmount").value);
+ if(balance<bet){document.getElementById("slotResult").innerText="Insufficient balance!";return;}
+ balance-=bet; updateBalance();
+ let reels=[symbols[Math.floor(Math.random()*symbols.length)],symbols[Math.floor(Math.random()*symbols.length)],symbols[Math.floor(Math.random()*symbols.length)]];
+ document.querySelectorAll(".reel").forEach((r,i)=>r.innerText=reels[i]);
+ let payout=0;
+ if(reels[0]===reels[1] && reels[1]===reels[2]){ if(reels[0]==="7️⃣") payout=bet*20; else if(reels[0]==="💎") payout=bet*10; else payout=bet*5;}
+ else if(reels[0]===reels[1]||reels[1]===reels[2]||reels[0]===reels[2]) payout=bet*2;
+ if(payout>0){balance+=payout; updateBalance(); document.getElementById("slotResult").innerText="🎉 Panalo ka! +"+payout;}
+ else document.getElementById("slotResult").innerText="Try again!";
+}
+</script>
 
 </body>
 </html>
