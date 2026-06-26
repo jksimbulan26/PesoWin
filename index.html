@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PesoWin | Online Casino Philippines</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Core palette */
+  --bg:          #0b1a0f;
+  --bg2:         #0e2214;
+  --surface:     #112818;
+  --surface2:    #163320;
+  --surface3:    #1a3d27;
+  --border:      #1e4a2c;
+  --border2:     #2a5e3a;
+
+  /* Accent – warm amber/gold */
+  --gold:        #f0c040;
+  --gold2:       #ffd94a;
+  --gold-dim:    rgba(240,192,64,0.12);
+  --gold-glow:   rgba(240,192,64,0.25);
+
+  /* CTA – vivid orange */
+  --cta:         #ff6b1a;
+  --cta2:        #ff8533;
+  --cta-glow:    rgba(255,107,26,0.35);
+  --cta-dim:     rgba(255,107,26,0.12);
+
+  /* Text */
+  --white:       #f2faf5;
+  --text-mid:    #8fba9f;
+  --text-dim:    #4e7a5e;
+
+  /* Status */
+  --red:         #e84040;
+  --green-live:  #2ecc71;
+
+  --sidebar-w: 228px;
+  --nav-h: 62px;
+  --radius: 10px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+/* ══════════════════════════════
+   TOP NAV
+══════════════════════════════ */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(11,26,15,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; z-index: 300; gap: 12px;
+}
+
+.nav-left { display: flex; align-items: center; gap: 14px; }
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--gold), #e0a820);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; font-weight: 900;
+  color: #0b1a0f;
+  box-shadow: 0 0 16px var(--gold-glow), 0 2px 6px rgba(0,0,0,0.4);
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -1px;
+}
+.logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 1.35rem;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+.logo-text em { color: var(--gold); font-style: normal; }
+
+.nav-search {
+  flex: 1; max-width: 300px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; height: 38px;
+  transition: border-color 0.2s;
+}
+.nav-search:focus-within { border-color: var(--gold); }
+.nav-search input {
+  background: none; border: none; outline: none;
+  color: var(--white); font-size: 0.82rem;
+  font-family: 'Inter', sans-serif; width: 100%;
+}
+.nav-search input::placeholder { color: var(--text-dim); }
+.search-ic { color: var(--text-dim); font-size: 0.85rem; flex-shrink: 0; }
+
+.nav-right { display: flex; align-items: center; gap: 8px; }
+
+.balance-pill {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px; padding: 6px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.btn-deposit {
+  background: linear-gradient(135deg, var(--cta), #e05500);
+  color: white; border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 0.85rem;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 9px 22px; cursor: pointer;
+  border-radius: 8px; transition: all 0.2s;
+  box-shadow: 0 3px 14px var(--cta-glow);
+  white-space: nowrap;
+}
+.btn-deposit:hover {
+  background: linear-gradient(135deg, var(--cta2), var(--cta));
+  box-shadow: 0 4px 20px var(--cta-glow);
+  transform: translateY(-1px);
+}
+
+.ic-btn {
+  width: 36px; height: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.95rem;
+  color: var(--text-mid); transition: all 0.2s;
+}
+.ic-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.user-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px; padding: 5px 12px 5px 6px;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.user-pill:hover { border-color: var(--gold); }
+.user-av {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--cta), var(--gold));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+.user-name { font-size: 0.82rem; font-weight: 600; color: var(--white); }
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.layout { display: flex; margin-top: var(--nav-h); min-height: calc(100vh - var(--nav-h)); }
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed; top: var(--nav-h); left: 0; bottom: 0;
+  overflow-y: auto; z-index: 200;
+  display: flex; flex-direction: column;
+}
+
+.sb-bonus {
+  margin: 14px 12px 10px;
+  background: linear-gradient(135deg, #1a3a10, #0e2208);
+  border: 1px solid rgba(240,192,64,0.3);
+  border-radius: var(--radius);
+  padding: 14px 16px; cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.sb-bonus::before {
+  content: '🎁';
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 2rem; opacity: 0.18;
+}
+.sb-bonus:hover { border-color: var(--gold); box-shadow: 0 0 18px var(--gold-dim); }
+.sb-bonus-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.5px; color: var(--gold);
+  text-transform: uppercase;
+}
+.sb-bonus-sub { font-size: 0.7rem; color: var(--text-mid); margin-top: 3px; }
+.sb-bonus-tag {
+  display: inline-block; margin-top: 8px;
+  background: var(--cta); color: white;
+  font-size: 0.62rem; font-weight: 700;
+  padding: 3px 9px; border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.sb-div { height: 1px; background: var(--border); margin: 4px 0; }
+.sb-lbl {
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-dim); padding: 10px 18px 4px;
+}
+
+.sb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px; cursor: pointer;
+  color: var(--text-mid); font-size: 0.84rem;
+  font-weight: 400; transition: all 0.15s;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+.sb-item:hover { background: var(--surface); color: var(--white); border-left-color: var(--border2); }
+.sb-item.active { background: var(--surface); color: var(--gold); border-left-color: var(--gold); font-weight: 600; }
+.sb-ic { font-size: 1rem; width: 18px; text-align: center; flex-shrink: 0; }
+.sb-badge {
+  margin-left: auto;
+  background: var(--cta); color: white;
+  font-size: 0.58rem; font-weight: 700;
+  padding: 2px 6px; border-radius: 10px;
+}
+.sb-badge.new { background: var(--green-live); }
+.sb-count { margin-left: auto; font-size: 0.7rem; color: var(--text-dim); }
+
+/* ══════════════════════════════
+   MAIN
+══════════════════════════════ */
+.main { margin-left: var(--sidebar-w); flex: 1; padding: 20px 24px 48px; }
+
+/* ── Hero ── */
+.hero {
+  border-radius: 14px; overflow: hidden; position: relative;
+  background: linear-gradient(120deg, #061a08 0%, #0e3018 45%, #0a2210 100%);
+  min-height: 230px; display: flex; align-items: center; padding: 40px 48px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(240,192,64,0.18);
+  box-shadow: 0 0 40px rgba(46,204,113,0.06);
+}
+.hero-glow1 {
+  position: absolute; right: -20px; top: -40px;
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(240,192,64,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute; left: 30%; bottom: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(255,107,26,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-deco {
+  position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+  font-size: 9rem; opacity: 0.1; user-select: none; pointer-events: none;
+  filter: drop-shadow(0 0 20px rgba(240,192,64,0.3));
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: rgba(255,107,26,0.15);
+  border: 1px solid rgba(255,107,26,0.35);
+  color: var(--cta2); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 4px; margin-bottom: 14px;
+}
+.hero-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  text-transform: uppercase; line-height: 1.05;
+  margin-bottom: 6px; position: relative; z-index: 1;
+  letter-spacing: -0.5px;
+}
+.hero-h1 em { color: var(--gold); font-style: normal; }
+.hero-spins {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 1.1rem; color: var(--green-live);
+  margin-bottom: 24px; letter-spacing: 0.5px;
+}
+.hero-spins strong { font-size: 1.5rem; color: var(--green-live); }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn-cta {
+  background: linear-gradient(135deg, var(--cta), #cc4400);
+  color: white; border: none;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+  padding: 12px 32px; cursor: pointer; border-radius: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 18px var(--cta-glow);
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--cta-glow); background: linear-gradient(135deg, var(--cta2), var(--cta)); }
+
+.btn-ghost {
+  background: transparent; color: var(--gold);
+  border: 1.5px solid rgba(240,192,64,0.4);
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.9rem; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 12px 28px; cursor: pointer; border-radius: 8px; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+/* ── Jackpot Ticker ── */
+.jackpot-bar {
+  background: linear-gradient(90deg, #061208, #0e2214, #061208);
+  border: 1px solid rgba(240,192,64,0.25);
+  border-radius: var(--radius);
+  padding: 14px 22px; display: flex; align-items: center; gap: 20px;
+  overflow: hidden; position: relative; margin-bottom: 20px;
+}
+.jackpot-bar::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+.jp-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); flex-shrink: 0; white-space: nowrap;
+}
+.jp-scroll { flex: 1; overflow: hidden; position: relative; }
+.jp-track {
+  display: flex; gap: 40px;
+  animation: scrollTicker 22s linear infinite;
+  width: max-content;
+}
+@keyframes scrollTicker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.jp-item { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.jp-sep { color: var(--border2); font-size: 0.7rem; }
+.jp-game { font-size: 0.76rem; color: var(--text-mid); }
+.jp-amt {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.95rem; color: var(--gold);
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+/* ── Section header ── */
+.sec-hdr {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px; margin-top: 28px;
+}
+.sec-hdr h2 {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 1.05rem; text-transform: uppercase; letter-spacing: 1px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-hdr h2::before {
+  content: ''; display: inline-block;
+  width: 4px; height: 16px;
+  background: linear-gradient(to bottom, var(--cta), var(--gold));
+  border-radius: 3px;
+}
+.sec-see {
+  font-size: 0.76rem; color: var(--gold); cursor: pointer;
+  font-weight: 600; text-decoration: none; transition: color 0.2s;
+}
+.sec-see:hover { color: var(--gold2); }
+
+/* ── Quick Game Cards (Roulette, Slot 7, Dice) ── */
+.quick-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 4px;
+}
+.quick-card {
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: all 0.25s;
+}
+.quick-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(240,192,64,0.12); }
+.qc-top {
+  height: 86px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; gap: 12px;
+  position: relative; overflow: hidden;
+}
+.qc-bg1 { background: linear-gradient(135deg, #081a10, #0f3018); }
+.qc-bg2 { background: linear-gradient(135deg, #0a1812, #123025); }
+.qc-bg3 { background: linear-gradient(135deg, #0c1a10, #152c1c); }
+.qc-glow {
+  position: absolute; right: -20px; top: -20px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(240,192,64,0.12) 0%, transparent 70%);
+}
+.qc-icon { font-size: 2.6rem; position: relative; z-index: 1; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+.qc-info { position: relative; z-index: 1; }
+.qc-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 1rem; text-transform: uppercase;
+}
+.qc-sub { font-size: 0.66rem; color: var(--text-dim); margin-top: 2px; }
+.qc-foot {
+  padding: 9px 16px; background: rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.coming-txt { font-size: 0.64rem; color: var(--text-dim); font-style: italic; }
+.btn-play {
+  background: var(--cta); color: white; border: none;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 6px 18px; border-radius: 5px; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(255,107,26,0.3);
+}
+.btn-play:hover { background: var(--cta2); }
+
+/* ── Game Filter Tabs ── */
+.gtabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+.gtab {
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 0.76rem; font-weight: 600; cursor: pointer;
+  white-space: nowrap; border: 1px solid var(--border2);
+  color: var(--text-mid); transition: all 0.2s;
+  background: transparent; font-family: 'Inter', sans-serif;
+}
+.gtab.active { background: var(--cta); color: white; border-color: var(--cta); box-shadow: 0 2px 10px var(--cta-glow); }
+.gtab:not(.active):hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── Game Grid ── */
+.games-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; }
+.game-card {
+  border-radius: 10px; overflow: hidden; cursor: pointer;
+  position: relative; aspect-ratio: 3/4;
+  transition: transform 0.25s, box-shadow 0.25s;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+.game-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(240,192,64,0.18);
+  border-color: rgba(240,192,64,0.4);
+}
+.gc-bg {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.2rem; position: relative;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+.gc1  { background: linear-gradient(150deg, #0b2010, #1c4228); }
+.gc2  { background: linear-gradient(150deg, #091e18, #0f3428); }
+.gc3  { background: linear-gradient(150deg, #0c2028, #163840); }
+.gc4  { background: linear-gradient(150deg, #0a1e10, #123228); }
+.gc5  { background: linear-gradient(150deg, #101e28, #1a3038); }
+.gc6  { background: linear-gradient(150deg, #102028, #183040); }
+.gc7  { background: linear-gradient(150deg, #0b1e22, #0a3038); }
+.gc8  { background: linear-gradient(150deg, #0b1e20, #103030); }
+.gc9  { background: linear-gradient(150deg, #121828, #1a2840); }
+.gc10 { background: linear-gradient(150deg, #0c1a30, #10183d); }
+
+.gc-hot {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--red); color: white;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 7px; border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 2px 8px rgba(232,64,64,0.4);
+}
+.gc-new {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--green-live); color: #061208;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 7px; border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+}
+.gc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,18,8,0.9) 0%, rgba(6,18,8,0.2) 45%, transparent 70%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 10px;
+}
+.gc-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.gc-prov { font-size: 0.62rem; color: var(--text-mid); margin-top: 2px; }
+.gc-hover {
+  position: absolute; inset: 0;
+  background: rgba(6,18,8,0.65);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s; border-radius: 10px;
+}
+.game-card:hover .gc-hover { opacity: 1; }
+.play-ic {
+  background: linear-gradient(135deg, var(--cta), #cc4400);
+  color: white; border: none;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 10px 26px; border-radius: 6px; cursor: pointer;
+  box-shadow: 0 4px 16px var(--cta-glow);
+  transition: transform 0.15s;
+}
+.play-ic:hover { transform: scale(1.05); }
+
+/* ── Promo Cards ── */
+.promo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.promo-card {
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: all 0.25s;
+}
+.promo-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(255,107,26,0.1); border-color: rgba(255,107,26,0.3); }
+.promo-top {
+  height: 148px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 14px;
+}
+.pt1 { background: linear-gradient(135deg, #0c2010, #183a20); }
+.pt2 { background: linear-gradient(135deg, #0a1e18, #0e3228); }
+.pt3 { background: linear-gradient(135deg, #0d2028, #183840); }
+.pt4 { background: linear-gradient(135deg, #0b1e20, #103028); }
+.pt5 { background: linear-gradient(135deg, #101e28, #1a2e35); }
+.pt6 { background: linear-gradient(135deg, #111028, #181830); }
+.promo-num {
+  position: absolute; right: 14px; top: 8px;
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 3.4rem; color: var(--cta); opacity: 0.18; line-height: 1;
+}
+.promo-deco { position: absolute; right: 14px; bottom: 14px; font-size: 2.8rem; opacity: 0.2; }
+.promo-tag {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--cta-dim); border: 1px solid rgba(255,107,26,0.3);
+  color: var(--cta2); font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px;
+  font-family: 'Montserrat', sans-serif;
+}
+.promo-hl {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 1.05rem; text-transform: uppercase; line-height: 1.1;
+  position: relative; z-index: 1;
+}
+.promo-hl em { color: var(--gold); font-style: normal; }
+.promo-foot {
+  padding: 11px 14px; display: flex; align-items: center; gap: 10px;
+  background: rgba(0,0,0,0.25);
+}
+.promo-ic-wrap {
+  width: 30px; height: 30px; background: var(--cta);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.88rem; flex-shrink: 0; box-shadow: 0 2px 8px var(--cta-glow);
+}
+.promo-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.82rem; text-transform: uppercase;
+}
+.promo-sub { font-size: 0.64rem; color: var(--text-dim); }
+.promo-arr { margin-left: auto; color: var(--gold); font-size: 0.82rem; font-weight: 700; }
+
+/* ── Live Casino ── */
+.live-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.live-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: all 0.22s;
+}
+.live-card:hover { border-color: var(--cta); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,107,26,0.12); }
+.live-top {
+  height: 108px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; position: relative;
+}
+.lt1 { background: linear-gradient(135deg, #0c2010, #1a3828); }
+.lt2 { background: linear-gradient(135deg, #0b1e22, #0a2e38); }
+.lt3 { background: linear-gradient(135deg, #0e1830, #162240); }
+.lt4 { background: linear-gradient(135deg, #0b2220, #0f2e30); }
+.live-badge {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--red); color: white;
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 7px; border-radius: 4px;
+  display: flex; align-items: center; gap: 4px;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 2px 8px rgba(232,64,64,0.4);
+}
+.live-dot { width: 5px; height: 5px; background: white; border-radius: 50%; animation: blink 1.2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+.live-foot { padding: 10px 13px; }
+.live-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.86rem; text-transform: uppercase;
+}
+.live-ply { font-size: 0.66rem; color: var(--green-live); margin-top: 2px; }
+
+/* ── VIP ── */
+.vip-block {
+  background: linear-gradient(120deg, #071508, #0e2a14, #071508);
+  border: 1px solid rgba(240,192,64,0.3);
+  border-radius: 14px; padding: 36px 40px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 40px rgba(240,192,64,0.04);
+}
+.vip-block::after {
+  content: '👑'; position: absolute; right: 40px; top: 50%;
+  transform: translateY(-50%); font-size: 8rem; opacity: 0.06;
+  pointer-events: none;
+}
+.vip-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.9rem; text-transform: uppercase; margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.vip-title em { color: var(--gold); font-style: normal; }
+.vip-sub { color: var(--text-mid); font-size: 0.85rem; margin-bottom: 26px; max-width: 500px; line-height: 1.75; }
+.vip-tiers { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+.vip-tier {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 9px; padding: 14px 18px; min-width: 108px;
+  text-align: center; transition: all 0.2s; cursor: pointer;
+}
+.vip-tier:hover { border-color: var(--gold); box-shadow: 0 4px 16px var(--gold-dim); transform: translateY(-2px); }
+.vt-ic { font-size: 1.7rem; margin-bottom: 5px; }
+.vt-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.vt-req { font-size: 0.62rem; color: var(--text-dim); margin-top: 3px; }
+
+/* ── Events ── */
+.ev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.ev-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; cursor: pointer; transition: all 0.22s;
+}
+.ev-card:hover { border-color: var(--cta); background: var(--surface2); box-shadow: 0 6px 22px rgba(255,107,26,0.08); }
+.ev-date { font-size: 0.64rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.ev-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.95rem; text-transform: uppercase; margin-bottom: 7px;
+}
+.ev-title em { color: var(--cta2); font-style: normal; }
+.ev-desc { font-size: 0.76rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 13px; }
+.ev-prize { display: flex; align-items: center; gap: 7px; }
+.ev-pl { font-size: 0.64rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+.ev-pa {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 1.05rem; color: var(--gold);
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* ── Affiliate ── */
+.aff-strip {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 30px 36px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.aff-h {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.5rem; text-transform: uppercase; margin-bottom: 6px;
+}
+.aff-h em { color: var(--green-live); font-style: normal; }
+.aff-p { color: var(--text-mid); font-size: 0.82rem; max-width: 440px; line-height: 1.7; }
+.aff-stats { display: flex; gap: 28px; flex-shrink: 0; }
+.aff-n {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.8rem; color: var(--green-live);
+}
+.aff-l { font-size: 0.64rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── Payments ── */
+.pay-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.pay-badge {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 7px; padding: 9px 18px;
+  font-size: 0.77rem; font-weight: 500; color: var(--text-mid);
+  display: flex; align-items: center; gap: 7px;
+  cursor: pointer; transition: all 0.2s;
+}
+.pay-badge:hover { border-color: var(--green-live); color: var(--green-live); }
+
+/* ── Responsible Gaming ── */
+.resp {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 15px 20px;
+  display: flex; align-items: center; gap: 14px; margin-top: 10px;
+}
+.resp p { font-size: 0.74rem; color: var(--text-dim); line-height: 1.6; }
+.resp strong { color: var(--text-mid); }
+
+/* ── Footer ── */
+.site-footer {
+  margin-left: var(--sidebar-w);
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 28px 32px 20px;
+}
+.ft-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+.ft-brand {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 1.25rem; margin-bottom: 9px; letter-spacing: 0.5px;
+}
+.ft-brand em { color: var(--gold); font-style: normal; }
+.ft-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.85; max-width: 240px; }
+.ft-col-h {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--gold); margin-bottom: 12px;
+}
+.ft-a { display: block; font-size: 0.75rem; color: var(--text-dim); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+.ft-a:hover { color: var(--white); }
+.ft-bot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 18px; border-top: 1px solid var(--border);
+}
+.ft-bot p { font-size: 0.7rem; color: var(--text-dim); }
+.age-badge {
+  width: 28px; height: 28px; border: 2px solid var(--text-dim);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: var(--text-dim);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 1100px) { .games-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main, .site-footer { margin-left: 0; }
+  .games-grid { grid-template-columns: repeat(3, 1fr); }
+  .promo-grid, .ev-grid { grid-template-columns: 1fr 1fr; }
+  .live-grid { grid-template-columns: 1fr 1fr; }
+  .ft-top { grid-template-columns: 1fr 1fr; }
+  .aff-strip { flex-direction: column; }
+  .quick-row { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+  .promo-grid, .ev-grid { grid-template-columns: 1fr; }
+  .quick-row { grid-template-columns: 1fr; }
+  .hero { padding: 24px 20px; min-height: 200px; }
+  .hero-deco { display: none; }
+  .ft-top { grid-template-columns: 1fr; }
+  .main { padding: 12px 12px 36px; }
+  .nav-search { display: none; }
+  .vip-block { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOP NAV ══ -->
+<nav class="topnav">
+  <div class="nav-left">
+    <a href="#" class="logo">
+      <div class="logo-mark">₱</div>
+      <div class="logo-text"><em>Peso</em>Win</div>
+    </a>
+  </div>
+  <div class="nav-search">
+    <span class="search-ic">🔍</span>
+    <input type="text" placeholder="Hanapin ang laro...">
+  </div>
+  <div class="nav-right">
+    <div class="balance-pill">₱2,200</div>
+    <button class="btn-deposit">+ Mag-Deposit</button>
+    <div class="ic-btn">🔔</div>
+    <div class="ic-btn">⚙️</div>
+    <div class="user-pill">
+      <div class="user-av">JD</div>
+      <span class="user-name">Juan dela Cruz</span>
+    </div>
+  </div>
+</nav>
+
+<div class="layout">
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="sb-bonus">
+    <div class="sb-bonus-label">Bonus ng Bagong Miyembro</div>
+    <div class="sb-bonus-sub">Hanggang ₱10,000 sa unang deposit</div>
+    <div class="sb-bonus-tag">KUNIN NA</div>
+  </div>
+
+  <div class="sb-div"></div>
+
+  <a href="#" class="sb-item active"><span class="sb-ic">🏠</span> Lobby</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🎰</span> Casino</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🏆</span> Tournaments <span class="sb-badge">3</span></a>
+  <a href="#" class="sb-item"><span class="sb-ic">👑</span> VIP Club</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🎁</span> Mga Promosyon <span class="sb-badge new">6</span></a>
+  <a href="#" class="sb-item"><span class="sb-ic">ℹ️</span> Tungkol sa Amin</a>
+
+  <div class="sb-div"></div>
+  <div class="sb-lbl">Kategorya ng Laro</div>
+
+  <a href="#" class="sb-item"><span class="sb-ic">🎰</span> Slot Games <span class="sb-count">1,200+</span></a>
+  <a href="#" class="sb-item"><span class="sb-ic">🃏</span> Card Games</a>
+  <a href="#" class="sb-item"><span class="sb-ic">📡</span> Live Casino</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🎲</span> Table Games</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🎳</span> Fishing Games</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🔥</span> Crash Games <span class="sb-badge">Hot</span></a>
+  <a href="#" class="sb-item"><span class="sb-ic">🎯</span> Bingo / Lottery</a>
+
+  <div class="sb-div"></div>
+  <div class="sb-lbl">Tulong</div>
+
+  <a href="#" class="sb-item"><span class="sb-ic">💬</span> Live Chat</a>
+  <a href="#" class="sb-item"><span class="sb-ic">📞</span> Makipag-ugnayan</a>
+  <a href="#" class="sb-item"><span class="sb-ic">🛡️</span> Responsableng Paglalaro</a>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow1"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-deco">🏆</div>
+    <div>
+      <div class="hero-eyebrow">🎉 Pre-Release · WildJack</div>
+      <h1 class="hero-h1">Pre-Release<br><em>Mula sa WildJack</em></h1>
+      <div class="hero-spins"><strong>+100</strong> Libreng Spins — Ngayon Na!</div>
+      <div class="hero-actions">
+        <button class="btn-cta">KUNIN ANG BONUS →</button>
+        <button class="btn-ghost">Alamin Pa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JACKPOT TICKER -->
+  <div class="jackpot-bar">
+    <div class="jp-label">🏆 Live Jackpots</div>
+    <div class="jp-scroll">
+      <div class="jp-track">
+        <div class="jp-item"><span class="jp-game">Mega Fortune</span><span class="jp-amt">₱4,821,330</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Divine Fortune</span><span class="jp-amt">₱1,204,780</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Age of Gods</span><span class="jp-amt">₱892,450</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Gold Rush</span><span class="jp-amt">₱344,100</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Dragon's Luck</span><span class="jp-amt">₱128,900</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Mega Fortune</span><span class="jp-amt">₱4,821,330</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Divine Fortune</span><span class="jp-amt">₱1,204,780</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Age of Gods</span><span class="jp-amt">₱892,450</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Gold Rush</span><span class="jp-amt">₱344,100</span></div>
+        <div class="jp-item jp-sep">·</div>
+        <div class="jp-item"><span class="jp-game">Dragon's Luck</span><span class="jp-amt">₱128,900</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK GAMES (Roulette / Slot 7 / Dice) -->
+  <div class="quick-row">
+    <div class="quick-card">
+      <div class="qc-top qc-bg1">
+        <div class="qc-glow"></div>
+        <span class="qc-icon">🎡</span>
+        <div class="qc-info"><div class="qc-title">Roulette</div><div class="qc-sub">Roulette game</div></div>
+      </div>
+      <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
+    </div>
+    <div class="quick-card">
+      <div class="qc-top qc-bg2">
+        <div class="qc-glow"></div>
+        <span class="qc-icon">🎰</span>
+        <div class="qc-info"><div class="qc-title">Slot 7</div><div class="qc-sub">Slot 7 game</div></div>
+      </div>
+      <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
+    </div>
+    <div class="quick-card">
+      <div class="qc-top qc-bg3">
+        <div class="qc-glow"></div>
+        <span class="qc-icon">🎲</span>
+        <div class="qc-info"><div class="qc-title">Dice</div><div class="qc-sub">Dice game</div></div>
+      </div>
+      <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
+    </div>
+  </div>
+
+  <!-- FOR YOU -->
+  <div class="sec-hdr">
+    <h2>🔥 Para Sa Iyo</h2>
+    <a href="#" class="sec-see">Tingnan Lahat →</a>
+  </div>
+  <div class="gtabs">
+    <button class="gtab active">Lahat</button>
+    <button class="gtab">Slots</button>
+    <button class="gtab">Live</button>
+    <button class="gtab">Cards</button>
+    <button class="gtab">Table</button>
+    <button class="gtab">Crash</button>
+    <button class="gtab">Fishing</button>
+    <button class="gtab">Bago</button>
+  </div>
+  <div class="games-grid">
+    <div class="game-card"><div class="gc-bg gc1">🪙</div><div class="gc-hot">HOT</div><div class="gc-overlay"><div class="gc-name">Coin Win</div><div class="gc-prov">JILI Games</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc2">🐙</div><div class="gc-hot">HOT</div><div class="gc-overlay"><div class="gc-name">Release the Kraken</div><div class="gc-prov">Pragmatic Play</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc3">⚔️</div><div class="gc-new">BAGO</div><div class="gc-overlay"><div class="gc-name">Sword & the Grail</div><div class="gc-prov">Play'n GO</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc4">🪄</div><div class="gc-overlay"><div class="gc-name">Lamp of Wonder</div><div class="gc-prov">iSoftBet</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc5">💥</div><div class="gc-hot">HOT</div><div class="gc-overlay"><div class="gc-name">Mighty Crash</div><div class="gc-prov">Spribe</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc6">✈️</div><div class="gc-hot">HOT</div><div class="gc-overlay"><div class="gc-name">Aviator</div><div class="gc-prov">Spribe</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc7">🐉</div><div class="gc-new">BAGO</div><div class="gc-overlay"><div class="gc-name">Dragon Tiger</div><div class="gc-prov">SA Gaming</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc8">🎣</div><div class="gc-overlay"><div class="gc-name">Fish Hunter</div><div class="gc-prov">JILI Games</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc9">💎</div><div class="gc-overlay"><div class="gc-name">Diamond King</div><div class="gc-prov">Habanero</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+    <div class="game-card"><div class="gc-bg gc10">🌙</div><div class="gc-new">BAGO</div><div class="gc-overlay"><div class="gc-name">Moon Luck</div><div class="gc-prov">Playtech</div></div><div class="gc-hover"><button class="play-ic">▶ Laruin</button></div></div>
+  </div>
+
+  <!-- LIVE CASINO -->
+  <div class="sec-hdr">
+    <h2>📡 Live Casino</h2>
+    <a href="#" class="sec-see">Tingnan Lahat →</a>
+  </div>
+  <div class="live-grid">
+    <div class="live-card"><div class="live-top lt1"><span>🃏</span><div class="live-badge"><span class="live-dot"></span> LIVE</div></div><div class="live-foot"><div class="live-name">Live Baccarat</div><div class="live-ply">🟢 1,204 naglalaro ngayon</div></div></div>
+    <div class="live-card"><div class="live-top lt2"><span>🎡</span><div class="live-badge"><span class="live-dot"></span> LIVE</div></div><div class="live-foot"><div class="live-name">Live Roulette</div><div class="live-ply">🟢 892 naglalaro ngayon</div></div></div>
+    <div class="live-card"><div class="live-top lt3"><span>🂡</span><div class="live-badge"><span class="live-dot"></span> LIVE</div></div><div class="live-foot"><div class="live-name">Live Blackjack</div><div class="live-ply">🟢 563 naglalaro ngayon</div></div></div>
+    <div class="live-card"><div class="live-top lt4"><span>🐉</span><div class="live-badge"><span class="live-dot"></span> LIVE</div></div><div class="live-foot"><div class="live-name">Dragon Tiger</div><div class="live-ply">🟢 2,108 naglalaro ngayon</div></div></div>
+  </div>
+
+  <!-- PROMOTIONS -->
+  <div class="sec-hdr">
+    <h2>🎁 Mga Promosyon</h2>
+    <a href="#" class="sec-see">Lahat ng Promo →</a>
+  </div>
+  <div class="promo-grid">
+    <div class="promo-card"><div class="promo-top pt1"><div class="promo-tag">WELCOME BONUS</div><div class="promo-num">100%</div><div class="promo-deco">🎁</div><div class="promo-hl">I-DOBLE ANG IYONG<br><em>UNANG DEPOSIT!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">🎁</div><div><div class="promo-name">100% Welcome Bonus</div><div class="promo-sub">Hanggang ₱10,000 · Bagong manlalaro</div></div><div class="promo-arr">›</div></div></div>
+    <div class="promo-card"><div class="promo-top pt2"><div class="promo-tag">FREE SPIN</div><div class="promo-num">₱1</div><div class="promo-deco">🎰</div><div class="promo-hl">MAG-DEPOSIT ₱1,<br><em>LIBRENG SPIN!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">🎰</div><div><div class="promo-name">₱1 Libreng Spin</div><div class="promo-sub">Unang deposit · Slots lamang</div></div><div class="promo-arr">›</div></div></div>
+    <div class="promo-card"><div class="promo-top pt3"><div class="promo-tag">DAILY RELOAD</div><div class="promo-num">20%</div><div class="promo-deco">🔄</div><div class="promo-hl">RELOAD BONUS<br><em>ARAW-ARAW!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">🔄</div><div><div class="promo-name">Reload Bonus 20%</div><div class="promo-sub">Araw-araw · Lahat ng manlalaro</div></div><div class="promo-arr">›</div></div></div>
+    <div class="promo-card"><div class="promo-top pt4"><div class="promo-tag">LUCKY HOUR</div><div class="promo-num">3X</div><div class="promo-deco">⏰</div><div class="promo-hl">TRIPLE ANG IYONG<br><em>PANALO!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">⏰</div><div><div class="promo-name">Lucky Hour 3X</div><div class="promo-sub">3x araw-araw · Limitadong oras</div></div><div class="promo-arr">›</div></div></div>
+    <div class="promo-card"><div class="promo-top pt5"><div class="promo-tag">REFERRAL</div><div class="promo-num">₱500</div><div class="promo-deco">👥</div><div class="promo-hl">MAG-IMBITAHAN,<br><em>KUMITA NG PERA!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">👥</div><div><div class="promo-name">Mag-imbita at Kumita ₱500</div><div class="promo-sub">Bawat matagumpay na referral</div></div><div class="promo-arr">›</div></div></div>
+    <div class="promo-card"><div class="promo-top pt6"><div class="promo-tag">VIP EKSKLUSIBO</div><div class="promo-num">VIP</div><div class="promo-deco">👑</div><div class="promo-hl">I-UNLOCK ANG VIP<br><em>REWARDS NGAYON!</em></div></div><div class="promo-foot"><div class="promo-ic-wrap">👑</div><div><div class="promo-name">VIP Transfer Bonus</div><div class="promo-sub">Eksklusibo · Mga miyembro ng VIP</div></div><div class="promo-arr">›</div></div></div>
+  </div>
+
+  <!-- VIP -->
+  <div class="sec-hdr" style="margin-top:30px;">
+    <h2>👑 VIP Club</h2>
+    <a href="#" class="sec-see">Sumali sa VIP →</a>
+  </div>
+  <div class="vip-block">
+    <div class="vip-title">Eksklusibong <em>VIP</em> Rewards</div>
+    <p class="vip-sub">Mas marami kang nilalaro, mas malaki ang iyong kikitain. Ang mga miyembro ng PesoWin VIP ay nakatatanggap ng eksklusibong bonuses, mas mabilis na pag-withdraw, dedikadong support, at espesyal na events.</p>
+    <div class="vip-tiers">
+      <div class="vip-tier"><div class="vt-ic">🥉</div><div class="vt-name">Bronze</div><div class="vt-req">₱1,000+ nilaro</div></div>
+      <div class="vip-tier"><div class="vt-ic">🥈</div><div class="vt-name">Silver</div><div class="vt-req">₱10,000+ nilaro</div></div>
+      <div class="vip-tier"><div class="vt-ic">🥇</div><div class="vt-name">Gold</div><div class="vt-req">₱50,000+ nilaro</div></div>
+      <div class="vip-tier"><div class="vt-ic">💎</div><div class="vt-name">Diamond</div><div class="vt-req">₱200,000+ nilaro</div></div>
+      <div class="vip-tier"><div class="vt-ic">👑</div><div class="vt-name">Platinum</div><div class="vt-req">Invite only</div></div>
+    </div>
+    <button class="btn-cta" style="font-size:0.88rem; padding:12px 30px;">Sumali sa VIP Club →</button>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="sec-hdr">
+    <h2>🎯 Mga Event at Tournament</h2>
+    <a href="#" class="sec-see">Lahat ng Event →</a>
+  </div>
+  <div class="ev-grid">
+    <div class="ev-card"><div class="ev-date">📅 Hulyo 1 – 7, 2026</div><div class="ev-title">Slot <em>Fiesta</em> Tournament</div><p class="ev-desc">Makipagtunggali sa libu-libong manlalaro sa aming lingguhang slot tournament. Ang pinakamataas na multiplier ang mananalo.</p><div class="ev-prize"><span class="ev-pl">Prize Pool</span><span class="ev-pa">₱500,000</span></div></div>
+    <div class="ev-card"><div class="ev-date">📅 Bawat Sabado</div><div class="ev-title">Live <em>Baccarat</em> Grand Prix</div><p class="ev-desc">Lingguhang live baccarat tournament kasama ang mga tunay na dealer. Ang nangungunang 10 manlalaro ay magbabahagi ng premyo tuwing Sabado ng gabi.</p><div class="ev-prize"><span class="ev-pl">Lingguhang Premyo</span><span class="ev-pa">₱100,000</span></div></div>
+    <div class="ev-card"><div class="ev-date">📅 Araw-araw · 8PM–10PM</div><div class="ev-title">Lucky <em>Hour</em> Rush</div><p class="ev-desc">Maglaro ng kahit anong slot game tuwing Lucky Hour at kumita ng 3x na puntos. Lucky draw sa katapusan ng bawat session.</p><div class="ev-prize"><span class="ev-pl">Araw-araw na Premyo</span><span class="ev-pa">₱10,000</span></div></div>
+  </div>
+
+  <!-- AFFILIATE -->
+  <div class="sec-hdr">
+    <h2>🤝 Affiliate Program</h2>
+  </div>
+  <div class="aff-strip">
+    <div>
+      <div class="aff-h">Kumita Kasama ang <em>PesoWin</em></div>
+      <p class="aff-p">Sumali sa aming affiliate program at kumita ng hanggang 45% revenue share para sa bawat manlalarong i-re-refer mo. Walang limitasyon — mas marami kang i-refer, mas malaki ang iyong kikitain.</p>
+      <button class="btn-cta" style="margin-top:18px; font-size:0.84rem; padding:11px 26px;">Maging Affiliate</button>
+    </div>
+    <div class="aff-stats">
+      <div><div class="aff-n">45%</div><div class="aff-l">Rev Share</div></div>
+      <div><div class="aff-n">₱500</div><div class="aff-l">Bawat Referral</div></div>
+      <div><div class="aff-n">∞</div><div class="aff-l">Walang Limitasyon</div></div>
+    </div>
+  </div>
+
+  <!-- PAYMENTS -->
+  <div class="sec-hdr">
+    <h2>💳 Mga Paraan ng Bayad</h2>
+  </div>
+  <div class="pay-row">
+    <div class="pay-badge">📱 GCash</div>
+    <div class="pay-badge">💜 Maya</div>
+    <div class="pay-badge">🏦 Online Banking</div>
+    <div class="pay-badge">💳 Credit Card</div>
+    <div class="pay-badge">₿ Crypto</div>
+    <div class="pay-badge">🏧 ATM Transfer</div>
+    <div class="pay-badge">📮 7-Eleven</div>
+    <div class="pay-badge">🏪 Cebuana</div>
+  </div>
+
+  <!-- RESPONSIBLE -->
+  <div class="resp">
+    <span style="font-size:1.35rem; flex-shrink:0;">🛡️</span>
+    <p><strong>Responsableng Paglalaro:</strong> Ang PesoWin ay nakatuon sa ligtas at responsableng paglalaro. Mangyaring maglaro nang naaayon sa iyong kakayahan. Kung nakakaranas ka ng problema sa pagsusugal, makipag-ugnayan sa aming support team o bisitahin ang <strong>PAGCOR</strong>. Kailangan mong may edad 18 pataas para makapaglaro.</p>
+  </div>
+
+</main>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div class="ft-top">
+    <div>
+      <div class="ft-brand"><em>Peso</em>Win</div>
+      <p class="ft-desc">Ang PesoWin ay isang lisensyadong online casino platform para sa mga Pilipinong manlalaro. Nag-aalok kami ng mahigit 1,200 na laro, live dealers, at ligtas na bayad. Maglaro nang matalino, maglaro nang ligtas.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Mga Laro</div>
+      <a href="#" class="ft-a">Slot Games</a>
+      <a href="#" class="ft-a">Live Casino</a>
+      <a href="#" class="ft-a">Card Games</a>
+      <a href="#" class="ft-a">Table Games</a>
+      <a href="#" class="ft-a">Crash Games</a>
+      <a href="#" class="ft-a">Fishing Games</a>
+    </div>
+    <div>
+      <div class="ft-col-h">Kumpanya</div>
+      <a href="#" class="ft-a">Tungkol sa Amin</a>
+      <a href="#" class="ft-a">Mga Promosyon</a>
+      <a href="#" class="ft-a">VIP Club</a>
+      <a href="#" class="ft-a">Affiliate</a>
+      <a href="#" class="ft-a">Mga Event</a>
+      <a href="#" class="ft-a">Blog</a>
+    </div>
+    <div>
+      <div class="ft-col-h">Suporta</div>
+      <a href="#" class="ft-a">Live Chat</a>
+      <a href="#" class="ft-a">FAQ</a>
+      <a href="#" class="ft-a">Patakaran sa Privacy</a>
+      <a href="#" class="ft-a">Mga Tuntunin</a>
+      <a href="#" class="ft-a">Responsableng Paglalaro</a>
+      <a href="#" class="ft-a">Makipag-ugnayan</a>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2026 PesoWin. Lahat ng karapatan ay nakalaan. Lisensyado at Regulado ng PAGCOR.</p>
+    <div class="age-badge">18+</div>
+  </div>
+</footer>
+
+</body>
+</html>
