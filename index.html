@@ -867,7 +867,7 @@ body {
 
   <!-- QUICK GAMES (Roulette / Slot 7 / Dice) -->
   <div class="quick-row">
-    <div class="quick-card">
+    <div class="quick-card" onclick="openGame('roulette')">
       <div class="qc-top qc-bg1">
         <div class="qc-glow"></div>
         <span class="qc-icon">🎡</span>
@@ -875,15 +875,15 @@ body {
       </div>
       <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
     </div>
-    <div class="quick-card" onclick="openSlotGame()">
+    <div class="quick-card" onclick="openGame('slot')">
       <div class="qc-top qc-bg2">
         <div class="qc-glow"></div>
         <span class="qc-icon">🎰</span>
-        <div class="qc-info"><div class="qc-title">Slot 7</div><div class="qc-sub">Playable now</div></div>
+        <div class="qc-info"><div class="qc-title">Slot 7</div><div class="qc-sub">Slot 7 game</div></div>
       </div>
-      <div class="qc-foot"><span class="coming-txt">Jackpot up to 20x</span><button class="btn-play">LARUIN</button></div>
+      <div class="qc-foot"><span class="coming-txt">Malapit nang dumating</span><button class="btn-play">LARUIN</button></div>
     </div>
-    <div class="quick-card">
+    <div class="quick-card" onclick="openGame('dice')">
       <div class="qc-top qc-bg3">
         <div class="qc-glow"></div>
         <span class="qc-icon">🎲</span>
@@ -1059,42 +1059,37 @@ body {
 </footer>
 
 
-<div id="slotModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#112818; border:2px solid #f0c040; border-radius:16px; padding:30px; width:420px; text-align:center;">
-    <h2 style="color:#f0c040; margin-bottom:20px;">🎰 Slot 7</h2>
-    <div id="slotReels" style="display:flex; justify-content:center; gap:12px; margin-bottom:20px;">
-      <div class="reel">❔</div><div class="reel">❔</div><div class="reel">❔</div>
-    </div>
-    <div style="margin-bottom:15px;">Bet:
-      <select id="betAmount"><option value="10">₱10</option><option value="50">₱50</option><option value="100">₱100</option></select>
-    </div>
-    <button onclick="spinSlot()" class="btn-play" style="padding:12px 30px;">SPIN</button>
-    <button onclick="closeSlotGame()" class="btn-play" style="background:#777; margin-left:10px;">Close</button>
-    <p id="slotResult" style="margin-top:20px; color:white;"></p>
-  </div>
-</div>
-<style>
-.reel{width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:42px;background:#1a3d27;border:2px solid #f0c040;border-radius:12px;}
-</style>
-<script>
-let balance = 2200;
-const symbols = ["🍒","🍋","🔔","7️⃣","💎"];
-function updateBalance(){document.querySelector(".balance-pill").innerText = "₱" + balance.toLocaleString();}
-function openSlotGame(){document.getElementById("slotModal").style.display="flex";}
-function closeSlotGame(){document.getElementById("slotModal").style.display="none";}
-function spinSlot(){
- let bet=parseInt(document.getElementById("betAmount").value);
- if(balance<bet){document.getElementById("slotResult").innerText="Insufficient balance!";return;}
- balance-=bet; updateBalance();
- let reels=[symbols[Math.floor(Math.random()*symbols.length)],symbols[Math.floor(Math.random()*symbols.length)],symbols[Math.floor(Math.random()*symbols.length)]];
- document.querySelectorAll(".reel").forEach((r,i)=>r.innerText=reels[i]);
- let payout=0;
- if(reels[0]===reels[1] && reels[1]===reels[2]){ if(reels[0]==="7️⃣") payout=bet*20; else if(reels[0]==="💎") payout=bet*10; else payout=bet*5;}
- else if(reels[0]===reels[1]||reels[1]===reels[2]||reels[0]===reels[2]) payout=bet*2;
- if(payout>0){balance+=payout; updateBalance(); document.getElementById("slotResult").innerText="🎉 Panalo ka! +"+payout;}
- else document.getElementById("slotResult").innerText="Try again!";
-}
-</script>
+<div id="authModal" style="display:flex;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center;">
+<div style="background:#112818;padding:25px;border:2px solid #f0c040;border-radius:14px;width:360px">
+<h2 style="color:#f0c040">Register / Login</h2>
+<input id="username" placeholder="Username" style="width:100%;padding:10px;margin:8px 0">
+<input id="password" type="password" placeholder="Password" style="width:100%;padding:10px;margin:8px 0">
+<button onclick="registerUser()">Register</button>
+<button onclick="loginUser()">Login</button>
+<p id="authMsg" style="color:white"></p>
+</div></div>
 
+<div id="gameModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;align-items:center;justify-content:center;">
+<div style="background:#112818;padding:25px;border:2px solid #f0c040;border-radius:14px;width:420px;text-align:center">
+<h2 id="gameTitle" style="color:#f0c040"></h2>
+<div id="gameArea"></div>
+<button onclick="closeGame()">Close</button>
+</div></div>
+
+<script>
+let balance=500;
+function registerUser(){localStorage.setItem('pw_user',JSON.stringify({u:username.value,p:password.value,balance:500}));authMsg.innerText='Registered!';}
+function loginUser(){let u=JSON.parse(localStorage.getItem('pw_user')||'null'); if(u&&u.u===username.value&&u.p===password.value){balance=u.balance; authModal.style.display='none';} else authMsg.innerText='Invalid';}
+function saveBalance(){let u=JSON.parse(localStorage.getItem('pw_user')); if(u){u.balance=balance; localStorage.setItem('pw_user',JSON.stringify(u));}}
+function openGame(g){gameModal.style.display='flex'; gameTitle.innerText=g.toUpperCase();
+ if(g==='dice'){gameArea.innerHTML='<button onclick="rollDice()">Roll Dice</button><p id="result"></p>';}
+ if(g==='roulette'){gameArea.innerHTML='<button onclick="spinRoulette()">Spin Roulette</button><p id="result"></p>';}
+ if(g==='slot'){gameArea.innerHTML='<button onclick="spinSlot()">Spin Slot</button><p id="result"></p>';}
+}
+function closeGame(){gameModal.style.display='none';}
+function rollDice(){let n=Math.floor(Math.random()*6)+1; balance += (n>3?50:-20); result.innerText='Rolled '+n+' Balance ₱'+balance; saveBalance();}
+function spinRoulette(){let win=Math.random()>0.5; balance += (win?100:-50); result.innerText=(win?'Win':'Lose')+' Balance ₱'+balance; saveBalance();}
+function spinSlot(){let win=Math.random()>0.65; balance += (win?150:-30); result.innerText=(win?'Jackpot!':'Try again')+' Balance ₱'+balance; saveBalance();}
+</script>
 </body>
 </html>
